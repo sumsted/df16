@@ -7,74 +7,16 @@
       "intent": "quitIntent"
     },
     {
-      "intent": "playIntent"
+      "intent": "storyIntent"
     },
     {
-      "intent": "attackIntent",
-      "slots": [
-        {
-          "name": "monster",
-          "type": "LIST_OF_MONSTERS"
-        },
-        {
-          "name": "item",
-          "type": "LIST_OF_ITEMS"
-        }
-      ]
-    },
-    {
-      "intent": "attackNoMonsterIntent",
+      "intent": "aboutIntent",
       "slots": [
         {
           "name": "item",
-          "type": "LIST_OF_ITEMS"
+          "type": "AMAZON.NUMBER"
         }
       ]
-    },
-    {
-      "intent": "navigateIntent",
-      "slots": [
-        {
-          "name": "direction",
-          "type": "LIST_OF_DIRECTIONS"
-        }
-      ]
-    },
-    {
-      "intent": "lookDirectionIntent",
-      "slots": [
-        {
-          "name": "direction",
-          "type": "LIST_OF_DIRECTIONS"
-        }
-      ]
-    },
-    {
-      "intent": "lookIntent"
-    },
-    {
-      "intent": "takeIntent",
-      "slots": [
-        {
-          "name": "item",
-          "type": "LIST_OF_ITEMS"
-        }
-      ]
-    },
-    {
-      "intent": "eatIntent",
-      "slots": [
-        {
-          "name": "item",
-          "type": "LIST_OF_ITEMS"
-        }
-      ]
-    },
-    {
-      "intent": "healthIntent"
-    },
-    {
-      "intent": "restartIntent"
     },
     {
       "intent": "garyIntent"

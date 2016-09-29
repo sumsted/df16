@@ -7,7 +7,7 @@ from db_setup import DbSetup
 from settings import Settings
 
 settings = Settings()
-TEMPLATE_PATH.insert(0, settings.MEMPHIS['TEMPLATE_FOLDER'])
+TEMPLATE_PATH.insert(0, settings.DF16['TEMPLATE_FOLDER'])
 
 # database
 db_setup = DbSetup()
@@ -26,4 +26,4 @@ import routes.web
 import routes.alexa_api
 
 if __name__ == '__main__':
-    run(host=settings.MEMPHIS['HOST'], port=settings.MEMPHIS['PORT'], debug=True)
+    run(host=settings.DF16['HOST'], port=settings.DF16['PORT'], debug=True)

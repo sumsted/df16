@@ -1,9 +1,8 @@
 from bottle import request, post
 
 from logit import logit
-from routes.alexa_handlers import handle_help_intent, handle_session_end_request, handle_attack_intent, \
-    handle_navigate_intent, handle_look_intent, handle_take_intent, handle_health_intent, handle_gary_intent, \
-    handle_dude_intent, handle_eat_intent, handle_look_direction_intent, handle_play_intent
+from routes.alexa_handlers import handle_story_intent, handle_about_intent, handle_gary_intent, handle_dude_intent, \
+    handle_help_intent, handle_session_end_request
 
 
 @post('/alexa/event')
@@ -40,22 +39,10 @@ def route_intent(alexa_request, alexa_session):
     intent = alexa_request['intent']
     intent_name = alexa_request['intent']['name']
 
-    if intent_name in ["attackIntent", "attackNoMonsterIntent"]:
-        return handle_attack_intent(intent, alexa_session)
-    elif intent_name in ["playIntent"]:
-        return handle_play_intent(intent, alexa_session)
-    elif intent_name in ["navigateIntent"]:
-        return handle_navigate_intent(intent, alexa_session)
-    elif intent_name in ["lookDirectionIntent"]:
-        return handle_look_direction_intent(intent, alexa_session)
-    elif intent_name in ["lookIntent"]:
-        return handle_look_intent(intent, alexa_session)
-    elif intent_name in ["takeIntent"]:
-        return handle_take_intent(intent, alexa_session)
-    elif intent_name in ["eatIntent"]:
-        return handle_eat_intent(intent, alexa_session)
-    elif intent_name in ["healthIntent"]:
-        return handle_health_intent(intent, alexa_session)
+    if intent_name in ["storyIntent"]:
+        return handle_story_intent(intent, alexa_session)
+    elif intent_name in ["aboutIntent"]:
+        return handle_about_intent(intent, alexa_session)
     elif intent_name in ["garyIntent"]:
         return handle_gary_intent(intent, alexa_session)
     elif intent_name in ["dudeIntent"]:

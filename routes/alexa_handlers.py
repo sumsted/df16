@@ -1,5 +1,3 @@
-from game.game import get_help, gary, dude, attack, go, look_around, take, health, eat, look_direction
-from game.player import Player
 from logit import logit
 
 player = Player("Nicholas")
@@ -99,132 +97,29 @@ def handle_session_end_request():
         card_title, speech_output, None, should_end_session))
 
 
-def handle_attack_intent(intent, session):
-    title = "Memphis - ATTACK!"
+def handle_about_intent(intent, session):
+    title = "#DF16 - About"
     should_end_session = False
     session_attributes = {}
-    speech_output = "I'm attacking."
+    speech_output = "I'm talking about "
     reprompt_text = None
     try:
-        item_name = get_slot(intent, 'item', '')
-        speech_output = attack(player, item_name)
+        item_number = get_slot(intent, 'item', '')
+        speech_output += item_number
     except Exception as e:
         logit(str(e), 'ERROR')
     return build_response(session_attributes, build_speechlet_response(
         title, speech_output, reprompt_text, should_end_session))
 
 
-def handle_navigate_intent(intent, session):
-    title = "Memphis - RUN!"
+def handle_story_intent(intent, session):
+    title = "#DF16 - Story"
     should_end_session = False
     session_attributes = {}
-    speech_output = "I'm running."
+    speech_output = "Once upon a time, "
     reprompt_text = None
     try:
-        direction = get_slot(intent, 'direction', '')
-        speech_output = go(player, direction)
-    except Exception as e:
-        logit(str(e), 'ERROR')
-    return build_response(session_attributes, build_speechlet_response(
-        title, speech_output, reprompt_text, should_end_session))
-
-
-def handle_look_direction_intent(intent, session):
-    title = "Memphis - LOOKING!"
-    should_end_session = False
-    session_attributes = {}
-    speech_output = "I'm looking."
-    reprompt_text = None
-    try:
-        direction = get_slot(intent, 'direction', '')
-        speech_output = look_direction(player.location, direction)
-    except Exception as e:
-        logit(str(e), 'ERROR')
-    return build_response(session_attributes, build_speechlet_response(
-        title, speech_output, reprompt_text, should_end_session))
-
-
-def handle_look_intent(intent, session):
-    title = "Memphis - LOOKING!"
-    should_end_session = False
-    session_attributes = {}
-    speech_output = "I'm looking around."
-    reprompt_text = None
-    try:
-        speech_output = look_around(player)
-    except Exception as e:
-        logit(str(e), 'ERROR')
-    return build_response(session_attributes, build_speechlet_response(
-        title, speech_output, reprompt_text, should_end_session))
-
-
-def handle_take_intent(intent, session):
-    title = "Memphis - TAKING!"
-    should_end_session = False
-    session_attributes = {}
-    speech_output = "I'm taking stuff."
-    reprompt_text = None
-    try:
-        item_name = get_slot(intent, 'item', '')
-        speech_output = take(player, item_name)
-    except Exception as e:
-        logit(str(e), 'ERROR')
-    return build_response(session_attributes, build_speechlet_response(
-        title, speech_output, reprompt_text, should_end_session))
-
-
-def handle_health_intent(intent, session):
-    title = "Memphis - HEALTH!"
-    should_end_session = False
-    session_attributes = {}
-    speech_output = "I'm healthy."
-    reprompt_text = None
-    try:
-        speech_output = health(player)
-    except Exception as e:
-        logit(str(e), 'ERROR')
-    return build_response(session_attributes, build_speechlet_response(
-        title, speech_output, reprompt_text, should_end_session))
-
-
-def handle_eat_intent(intent, session):
-    title = "Memphis - EAT!"
-    should_end_session = False
-    session_attributes = {}
-    speech_output = "I'm eating."
-    reprompt_text = None
-    try:
-        item_name = get_slot(intent, 'item', '')
-        speech_output = eat(player, item_name)
-    except Exception as e:
-        logit(str(e), 'ERROR')
-    return build_response(session_attributes, build_speechlet_response(
-        title, speech_output, reprompt_text, should_end_session))
-
-
-def handle_restart_intent(intent, session):
-    title = "Memphis - RESTART!"
-    should_end_session = False
-    session_attributes = {}
-    speech_output = "I'm restarting."
-    reprompt_text = None
-    try:
-        pass
-    except Exception as e:
-        logit(str(e), 'ERROR')
-    return build_response(session_attributes, build_speechlet_response(
-        title, speech_output, reprompt_text, should_end_session))
-
-
-def handle_play_intent(intent, session):
-    title = "Memphis - Welcome!"
-    should_end_session = False
-    session_attributes = {}
-    speech_output = "Welcome to Memphis. Home of the Tigers. "
-    reprompt_text = None
-    try:
-        speech_output += look_around(player)
-        speech_output += health(player)
+        speech_output += 'ugh, do you really want to hear a story?'
     except Exception as e:
         logit(str(e), 'ERROR')
     return build_response(session_attributes, build_speechlet_response(

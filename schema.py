@@ -26,23 +26,30 @@ def make_serializable(v):
 class Authorizations(Base):
     __tablename__ = 'authorizations'
     authorization_id = Column(Integer(), primary_key=True)
-    access_token = Column(Text())
-    scope = Column(Text())
-    team_name = Column(Text())
-    team_id = Column(Text(), index=True)
-    user_id = Column(Text())
-    ok = Column(Boolean())
-    created = Column(DateTime(), default=datetime.now, index=True)
+    alexa_state = Column(Text)
+    alexa_client_id = Column(Text)
+    alexa_scope = Column(Text)
+    alexa_response_type = Column(Text)
+    access_token = Column(Text)
+    salesforce_access_token = Column(Text)
+    salesforce_authorization_token = Column(Text)
     user_name = Column(Text())
+    name = Column(Text())
+    email = Column(Text())
+    created = Column(DateTime(), default=datetime.now, index=True)
+    updated = Column(DateTime(), default=datetime.now, index=True)
 
-    def __init__(self,access_token=None, scope=None, team_name=None, team_id=None, user_id=None, ok=None, user_name=None):
+    def __init__(self, alexa_state = None, alexa_client_id = None, alexa_scope = None, alexa_response_type = None, access_token = None, salesforce_access_token = None, salesforce_authorization_token = None, user_name = None,name = None,    email = None):
+        self.alexa_state = alexa_state
+        self.alexa_client_id = alexa_client_id
+        self.alexa_scope = alexa_scope
+        self.alexa_response_type = alexa_response_type
         self.access_token = access_token
-        self.scope = scope
-        self.team_name = team_name
-        self.team_id = team_id
-        self.user_id = user_id
-        self.ok = ok
+        self.salesforce_access_token = salesforce_access_token
+        self.salesforce_authorization_token = salesforce_authorization_token
         self.user_name = user_name
+        self.name = name
+        self.email = email
 
 
 class Debug(Base):
