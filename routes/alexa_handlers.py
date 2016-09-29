@@ -77,7 +77,7 @@ def handle_help_intent():
 
     # If the user either does not reply to the welcome message or says something
     # that is not understood, they will be prompted again with this text.
-    reprompt_text = "Hey are you there? Memphis waits for no one. What would you like to do?"
+    reprompt_text = "Hey are you there? Astro waits for no one. What would you like to do?"
 
     help = get_help()
 
