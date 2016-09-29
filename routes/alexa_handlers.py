@@ -1,6 +1,5 @@
+from dream.dream import get_help, gary, dude
 from logit import logit
-
-player = Player("Nicholas")
 
 
 def get_access_token(alexa_session):
@@ -84,7 +83,7 @@ def handle_help_intent():
 
     should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
-        card_title, help[0], reprompt_text, should_end_session, help[1]))
+        card_title, help, reprompt_text, should_end_session, help))
 
 
 def handle_session_end_request():
