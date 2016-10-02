@@ -10,4 +10,8 @@ def get_shipment(tracking_number):
 
 @get('/carrier/<tracking_number>')
 def get_carrier(tracking_number):
-    return CarrierHelper_which_carrier(tracking_number)
+    try:
+        response = {'success': True, 'carrier': CarrierHelper_which_carrier(tracking_number)[0]}
+    except Exception as e:
+        response = {'success': False}
+    return response
