@@ -1,0 +1,86 @@
+{
+  "intents": [
+    {
+      "intent": "helpIntent"
+    },
+    {
+      "intent": "quitIntent"
+    },
+    {
+      "intent": "playIntent"
+    },
+    {
+      "intent": "attackIntent",
+      "slots": [
+        {
+          "name": "monster",
+          "type": "LIST_OF_MONSTERS"
+        },
+        {
+          "name": "item",
+          "type": "LIST_OF_ITEMS"
+        }
+      ]
+    },
+    {
+      "intent": "attackNoMonsterIntent",
+      "slots": [
+        {
+          "name": "item",
+          "type": "LIST_OF_ITEMS"
+        }
+      ]
+    },
+    {
+      "intent": "navigateIntent",
+      "slots": [
+        {
+          "name": "direction",
+          "type": "LIST_OF_DIRECTIONS"
+        }
+      ]
+    },
+    {
+      "intent": "lookDirectionIntent",
+      "slots": [
+        {
+          "name": "direction",
+          "type": "LIST_OF_DIRECTIONS"
+        }
+      ]
+    },
+    {
+      "intent": "lookIntent"
+    },
+    {
+      "intent": "takeIntent",
+      "slots": [
+        {
+          "name": "item",
+          "type": "LIST_OF_ITEMS"
+        }
+      ]
+    },
+    {
+      "intent": "eatIntent",
+      "slots": [
+        {
+          "name": "item",
+          "type": "LIST_OF_ITEMS"
+        }
+      ]
+    },
+    {
+      "intent": "healthIntent"
+    },
+    {
+      "intent": "restartIntent"
+    },
+    {
+      "intent": "garyIntent"
+    },
+    {
+      "intent": "dudeIntent"
+    }
+  ]
+}
