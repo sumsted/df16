@@ -24,6 +24,7 @@ install(plugin)
 # routes are here and use default_app, to be after app and db setup
 import routes.web
 import routes.alexa_api
+import routes.carrier_api
 
 if __name__ == '__main__':
     run(host=settings.DF16['HOST'], port=settings.DF16['PORT'], debug=True)
