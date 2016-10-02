@@ -21,7 +21,7 @@ a school you wish you went to. You could even add rooms that have nothing to do 
 ROOMS is a List of Lists of Strings
 """
 ROOMS = [
-    ['Calidorniz Museum of Science',    'Morton\'s Steak House', 'Tiffany\'s', 'Apple Union Square', 'Exploratorum'],
+    ['California Museum of Science',    'Morton\'s Steak House', 'Tiffany\'s', 'Apple Union Square', 'Exploratorum'],
     ['Registration at Hilton',   'The Westin', 'Union Square', 'Ghiradelli', 'The Ferry Building'],
     ['Mall at Westfield', 'cable car turn around', 'Sales and Service at Marriot', 'Super Duper Burger', 'Partners at Park'],
     ['Breakout at Intercontinental',     'Trailhead at Moscone West', 'City View', 'Yerba Buena Gardens', 'Salesforce Offices'],

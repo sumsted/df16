@@ -1,0 +1,46 @@
+direction
+
+north
+south
+east
+west
+up
+down
+
+
+items
+
+spoon
+sword
+messenger bag
+skinny jeans
+beard trimmer
+mac book pro
+conference badge
+tall latte
+session speaker
+keynote speaker
+new raccoon suit
+water bottle
+iphone
+pizza
+noodles
+red bull
+skittles
+unicorn
+chicken
+
+
+monsters
+
+Grover
+Elmo
+Cookie Monster
+Big Bird
+Potato Man
+Peanutbot
+Count von Count
+Ernie
+Bert
+Kermit
+Herry the Monster
