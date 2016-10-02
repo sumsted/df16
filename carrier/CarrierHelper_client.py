@@ -12,8 +12,8 @@ def g(action, *args):
         if arg is not None:
             url += '/' + str(arg)
     r = requests.get(url,
-                     auth=HTTPBasicAuth(settings.CARRIER['CARRIER_USERNAME'],
-                                        settings.CARRIER['CARRIER_PASSWORD'])
+                     auth=HTTPBasicAuth(settings.CARRIER['USERNAME'],
+                                        settings.CARRIER['PASSWORD'])
                      )
     return r.json()
 
