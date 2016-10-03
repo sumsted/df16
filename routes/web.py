@@ -1,4 +1,4 @@
-from bottle import static_file, route, get, post
+from bottle import static_file, route, get, post, template
 from settings import Settings
 from logit import logit
 
@@ -22,7 +22,7 @@ def get_enable():
     # todo: generate skill access token that will be used by amazon
     # todo: present instructions and button to redirect to sf.com
     # todo: create new authorization row with data we have including the alexa access token that we generated
-    pass
+    return template('enable.html')
 
 
 @post('/enable')

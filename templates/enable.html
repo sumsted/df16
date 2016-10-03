@@ -1,0 +1,21 @@
+%include _header
+
+<div class="container">
+    <div class="row add-a-little-space">
+        <form action="/enable" method="post" class="form-horizontal" autocomplete="off">
+            <fieldset>
+                <div class="form-group text-center">
+                    <label class="col-md-4 control-label" for="enable"></label>
+                    <div class="col-md-4">
+                        <button id="enable" name="enable" type="submit" class="btn btn-primary">Enable
+                            Skill Using Salesforce
+                        </button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+%include('_footer.html',script='app.js')
