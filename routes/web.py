@@ -38,3 +38,9 @@ def get_callback():
     # todo: store salesforce access token with alexa authorization row by alexa access token
 
     pass
+
+
+@get('/df/shipment/<email_address>/<order_id>')
+def get_shipment(email_address, order_id):
+    # todo : call a bunch of sf here
+    pass

@@ -57,6 +57,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
+                    <a href="#track">Track</a>
+                </li>
+                <li>
                     <a href="#how">How?</a>
                 </li>
                 <li>
@@ -85,7 +88,7 @@
                     <ul class="list-inline intro-social-buttons">
                         <li>
                             <a href="http://www.salesforce.com" target="_blank"><img class="vendor-logo"
-                                                                                          src="/static/img/salesforce.png"></a>
+                                                                                     src="/static/img/salesforce.png"></a>
                         </li>
                         <li>
                             <a href="http://www.amazon.com/oc/echo/" target="_blank"><img class="vendor-logo"
@@ -102,6 +105,64 @@
 
 <!-- Page Content -->
 
+<a name="track"></a>
+<div class="content-section-b">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-sm-6">
+                <div class="clearfix"></div>
+                <h2 class="section-heading purple-section-heading">Track your orders</h2>
+                <p class="lead">Enter the email address you used when creating the order.</p>
+                <p class="lead">Provide the order number sent to you in email.</p>
+            </div>
+            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                <h2 class="section-heading purple-section-heading">&nbsp;</h2>
+                <form name="track-form" id="track-form" class="form-horizontal purple-spacer">
+                    <fieldset>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input id="email" name="email" type="text" placeholder="Email"
+                                       class="form-control input-md">
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input id="order" name="order" type="text" placeholder="Order Number"
+                                       class="form-control input-md">
+                            </div>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button type="submit" id="track" name="track" class="btn btn-primary pull-right">Track
+                                    my package
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12" id="results">
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+</div>
+
+
 <a name="how"></a>
 <div class="content-section-b">
 
@@ -113,7 +174,8 @@
                 <div class="astro-step">Step 1</div>
                 <p class="lead">Add tracking numbers to your orders in Salesforce.</p>
                 <div class="astro-step">Step 2</div>
-                <p class="lead">Astro identifies your carrier then updates your orders with the latest delivery status.</p>
+                <p class="lead">Astro identifies your carrier then updates your orders with the latest delivery
+                    status.</p>
                 <div class="astro-step">Step 3</div>
                 <p class="lead">Astro alerts you and your customers once a delivery is confirmed.</p>
                 <div class="astro-step">Step 4</div>
@@ -124,30 +186,56 @@
             <div class="col-lg-5 col-lg-offset-2 col-sm-6 text-center">
                 <img class="box-the-image" src="/static/img/cameras.png" alt="">
             </div>
+        </div>
+        <!-- /.container -->
+
     </div>
-    <!-- /.container -->
-
-</div>
-<!-- /.content-section-b -->
+    <!-- /.content-section-b -->
 
 
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <p class="copyright text-muted small">Copyright &copy; Scott Umsted - All Rights Reserved</p>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="copyright text-muted small">Copyright &copy; Scott Umsted - All Rights Reserved</p>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
-<!-- jQuery -->
-<script src="/static/js/jquery.js"></script>
+    <!-- jQuery -->
+    <script src="/static/js/jquery.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/static/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/js/bootstrap.min.js"></script>
 
+    <script>
+
+        $(function () {
+            $('#track-form').submit(function () {
+                var data =
+                {
+                    sender: $('#email').val(),
+                    subject: $('#order').val(),
+                };
+                var url = "/purple/track";
+                $.ajax({
+                    url: url,
+                    jsonp: "callback",
+                    dataType: "jsonp",
+                    data: data,
+                    success: function (response) {
+                        console.log(response);
+                        $('#results').text(response.message);
+                        document.getElementById("track-form").reset();
+                    }
+                });
+
+                return false;
+            });
+        });
+    </script>
 </body>
 
 </html>
