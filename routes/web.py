@@ -14,7 +14,7 @@ def server_static(filepath):
 
 @get('/')
 def get_index():
-    return 'Hello'
+    return template('index.html')
 
 
 @get('/enable')
