@@ -1,4 +1,5 @@
 from bottle import static_file, route, get, post, template
+
 from settings import Settings
 from logit import logit
 
@@ -43,4 +44,17 @@ def get_callback():
 @get('/df/shipment/<email_address>/<order_id>')
 def get_shipment(email_address, order_id):
     # todo : call a bunch of sf here
-    pass
+    shipments = {
+        'shipments': [
+            {
+                'Order_Id__c': '1234',
+                'Shipment_Name__c': 'cameras',
+                'Tracking_Number__c': '9999999999',
+                'Carrier__c': 'UPS',
+                'Carrier_Link__c': 'http://google.com',
+                'Scans__c': 'scan 1 scan 2 scan 3',
+                'Status__c': 'In Transit'
+            }
+        ]
+    }
+    return shipments

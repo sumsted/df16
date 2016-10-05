@@ -57,14 +57,14 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#track">Track</a>
+                    <a href="#tracking">Track</a>
                 </li>
-                <li>
-                    <a href="#how">How?</a>
-                </li>
-                <li>
-                    <a href="#">Login</a>
-                </li>
+                <!--<li>-->
+                    <!--<a href="#how">How?</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="#">Login</a>-->
+                <!--</li>-->
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -105,15 +105,15 @@
 
 <!-- Page Content -->
 
-<a name="track"></a>
+<a name="tracking"></a>
 <div class="content-section-b">
 
     <div class="container">
         <div class="row">
             <div class="col-lg-5 col-sm-6">
                 <div class="clearfix"></div>
-                <h2 class="section-heading purple-section-heading">Track your orders</h2>
-                <p class="lead">Enter the email address you used when creating the order.</p>
+                <h2 class="section-heading astro-section-heading">Track your orders</h2>
+                <p class="lead">Enter the email address you used when creating your order.</p>
                 <p class="lead">Provide the order number sent to you in email.</p>
             </div>
             <div class="col-lg-5 col-lg-offset-2 col-sm-6">
@@ -141,7 +141,7 @@
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <button type="submit" id="track" name="track" class="btn btn-primary pull-right">Track
-                                    my package
+                                    my order
                                 </button>
                             </div>
                         </div>
@@ -163,34 +163,34 @@
 </div>
 
 
-<a name="how"></a>
-<div class="content-section-b">
+<!--<a name="how"></a>-->
+<!--<div class="content-section-b">-->
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-5 col-sm-6">
-                <div class="clearfix"></div>
-                <h2 class="section-heading astro-section-heading">How it works?</h2>
-                <div class="astro-step">Step 1</div>
-                <p class="lead">Add tracking numbers to your orders in Salesforce.</p>
-                <div class="astro-step">Step 2</div>
-                <p class="lead">Astro identifies your carrier then updates your orders with the latest delivery
-                    status.</p>
-                <div class="astro-step">Step 3</div>
-                <p class="lead">Astro alerts you and your customers once a delivery is confirmed.</p>
-                <div class="astro-step">Step 4</div>
-                <p class="lead">Use Amazon Alexa to check the status of your order shipments.</p>
-                <p class="lead">"Alexa, ask Astro, where are my orders?"</p>
-            </div>
+    <!--<div class="container">-->
+        <!--<div class="row">-->
+            <!--<div class="col-lg-5 col-sm-6">-->
+                <!--<div class="clearfix"></div>-->
+                <!--<h2 class="section-heading astro-section-heading">How it works?</h2>-->
+                <!--<div class="astro-step">Step 1</div>-->
+                <!--<p class="lead">Add tracking numbers to your orders in Salesforce.</p>-->
+                <!--<div class="astro-step">Step 2</div>-->
+                <!--<p class="lead">Astro identifies your carrier then updates your orders with the latest delivery-->
+                    <!--status.</p>-->
+                <!--<div class="astro-step">Step 3</div>-->
+                <!--<p class="lead">Astro alerts you and your customers once a delivery is confirmed.</p>-->
+                <!--<div class="astro-step">Step 4</div>-->
+                <!--<p class="lead">Use Amazon Alexa to check the status of your order shipments.</p>-->
+                <!--<p class="lead">"Alexa, ask Astro, where are my orders?"</p>-->
+            <!--</div>-->
 
-            <div class="col-lg-5 col-lg-offset-2 col-sm-6 text-center">
-                <img class="box-the-image" src="/static/img/cameras.png" alt="">
-            </div>
-        </div>
-        <!-- /.container -->
+            <!--<div class="col-lg-5 col-lg-offset-2 col-sm-6 text-center">-->
+                <!--<img class="box-the-image" src="/static/img/cameras.png" alt="">-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; /.container &ndash;&gt;-->
 
-    </div>
-    <!-- /.content-section-b -->
+    <!--</div>-->
+    <!--&lt;!&ndash; /.content-section-b &ndash;&gt;-->
 
 
     <!-- Footer -->
@@ -216,22 +216,19 @@
             $('#track-form').submit(function () {
                 var data =
                 {
-                    sender: $('#email').val(),
-                    subject: $('#order').val(),
+                    email: $('#email').val(),
+                    order: $('#order').val(),
                 };
-                var url = "/purple/track";
-                $.ajax({
-                    url: url,
-                    jsonp: "callback",
-                    dataType: "jsonp",
-                    data: data,
-                    success: function (response) {
-                        console.log(response);
-                        $('#results').text(response.message);
-                        document.getElementById("track-form").reset();
-                    }
+                var url = "/df/shipment/"+data.email+"/"+data.email;
+               $.getJSON(
+                    url
+                ).done(function (data) {
+                    var markup = data.order
+                    $.each(data.shipments, function (index, shipment) {
+                        var result = "<p>"+shipment.Order_Id__c+"</p><p>"+shipment.Shipment_Name__c+"</p><p>"+shipment.Tracking_Number__c+"</p><p>"+shipment.Carrier_Link__c+"</p>"+shipment.Status__c+"</p><p>"+shipment.Scans__c+"</p>";
+                        $("#results").append(result);
+                    });
                 });
-
                 return false;
             });
         });
