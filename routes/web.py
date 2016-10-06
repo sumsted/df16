@@ -62,7 +62,7 @@ def get_shipment(email_address, shipment_id):
 
 
 @get('/df/order/<email_address>/<order_id>')
-def get_shipment(email_address, order_id):
+def get_order(email_address, order_id):
     shipments = {
         'shipments': [
         ]

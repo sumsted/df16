@@ -24,3 +24,4 @@ shipmentIntent where is my order
 shipmentIntent where are my orders
 shipmentIntent where is my shipment
 shipmentIntent where are my shipments
+orderIntent where is order {order_id}

@@ -19,6 +19,15 @@
       ]
     },
     {
+      "intent": "orderIntent",
+      "slots": [
+        {
+          "name": "order_id",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
       "intent": "garyIntent"
     },
     {
