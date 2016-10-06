@@ -1,4 +1,4 @@
-from dream.dream import get_help, gary, dude, get_shipments
+from dream.dream import get_help, gary, dude, get_shipment
 from logit import logit
 
 
