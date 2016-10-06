@@ -57,7 +57,7 @@ def get_shipment_by_order(order_id):
         sh = SfHelper()
         sf_objects = sh.get_data(url)
         logit("sf_objects: %s"%str(sf_objects))
-        recs = sf_objects['Shipments__r']['records']
+        recs = sf_objects['records'][0]['Shipments__r']['records']
         count = len(recs)
         if count == 0:
             speech = "You have no orders. "
