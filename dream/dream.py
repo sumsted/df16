@@ -41,7 +41,8 @@ def get_shipment():
             if count == 1:
                 speech = "Your %s is being delivered by %s and has a shipment status of %s." % (i, sf_object['Name'], sf_object['Carrier__c'], sf_object['Status__c'])
             else:
-                speech = "Shipment %d is a %s, is being delivered by %s and has a shipment status of %s." % (i, sf_object['Name'], sf_object['Carrier__c'], sf_object['Status__c'])
+                verb = "are" if sf_object['Name'][-1] == "s" else "is"
+                speech += "Shipment %d %s a %s, is being delivered by %s and has a shipment status of %s." % (i, verb, sf_object['Name'], sf_object['Carrier__c'], sf_object['Status__c'])
     except Exception as e:
         logit('problem getting shipment')
         speech = "There was a problem pulling your shipments"
