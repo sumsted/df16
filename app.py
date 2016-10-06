@@ -4,9 +4,11 @@ import bottle_sqlalchemy as sqlalchemy
 from bottle import TEMPLATE_PATH, install, run
 
 from db_setup import DbSetup
+from services.sf_helper import SfHelper
 from settings import Settings
 
 settings = Settings()
+sf_helper = SfHelper()
 TEMPLATE_PATH.insert(0, settings.DF16['TEMPLATE_FOLDER'])
 
 # database

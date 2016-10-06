@@ -1,7 +1,8 @@
 from bottle import static_file, route, get, post, template
 
-from settings import Settings
 from logit import logit
+from services.sf_helper import SfHelper
+from settings import Settings
 
 logit('importing web.py')
 
@@ -41,20 +42,20 @@ def get_callback():
     pass
 
 
-@get('/df/shipment/<email_address>/<order_id>')
-def get_shipment(email_address, order_id):
+@get('/df/shipment/<email_address>/<shipment_id>')
+def get_shipment(email_address, shipment_id):
     # todo : call a bunch of sf here
     shipments = {
         'shipments': [
-            {
-                'Order_Id__c': '1234',
-                'Shipment_Name__c': 'cameras',
-                'Tracking_Number__c': '9999999999',
-                'Carrier__c': 'UPS',
-                'Carrier_Link__c': 'http://google.com',
-                'Scans__c': 'scan 1 scan 2 scan 3',
-                'Status__c': 'In Transit'
-            }
         ]
     }
+    url = "/services/data/v37.0/query/?q=select+Shipment_Number__c,+Name,+Tracking_Number__c,+Carrier__c,+Carrier_Link__c,+Status__c,+Scans__c+from+Shipment__c+where+Shipment_Number__C='%s'" % shipment_id
+
+    sh = SfHelper()
+    try:
+        sf_objects = sh.get_data(url)
+        for sf_object in sf_objects['records']:
+            shipments['shipments'].append(sf_object)
+    except Exception as e:
+        logit('problem getting shipment for %s, %s'%(email_address, shipment_id))
     return shipments

@@ -33,31 +33,30 @@ class SfHelper:
             response = requests.post(settings.SALESFORCE['LOGIN_URL'], credentials)
             if response.status_code == 200:
                 self.sf_access = response.json()
-                logit('it worked'+str(self.sf_access))
             else:
                 self.sf_access = {}
-                logit('it failed')
 
-        def test_access_token(self, res):
+        def test_access_token(self):
             headers = {
-                'Authorization': 'Bearer' + self.sf_access['access_token']
+                'Authorization': 'Bearer ' + self.sf_access['access_token']
             }
 
-            response = requests.get(settings.SALESFORCE['BASE_URL']+'/services/data/v26.0sobjects', headers=headers)
+            response = requests.get(settings.SALESFORCE['BASE_URL']+'/services/data/v26.0/sobjects', headers=headers)
             if response.status_code == 200:
                 logit('sf good', 'INFO')
             else:
                 logit('sf bad', 'ERROR')
 
-        def get_data(self, options, reauthorize=None):
+        def get_data(self, url, reauthorize=None):
             reauthorize = True if reauthorize is None else False
-            options['headers'] = {'Authorization': 'Bearer ' + self.sf_access['access_token']}
-            response = requests.get(options['url'])
+            headers = {'Authorization': 'Bearer ' + self.sf_access['access_token']}
+            request_url = self.sf_access['instance_url'] + url
+            response = requests.get(request_url, headers=headers)
             if response.status_code == 200:
                 return response.json()
-            elif 'INVALID_SESSION_ID' in response.content and reauthorize is True:
+            elif response.content.index('INVALID_SESSION_ID') and reauthorize is True:
                 self.authorize()
-                return self.get_data(options, False)
+                return self.get_data(url, False)
             else:
                 return {'success': False}
 
@@ -111,4 +110,7 @@ class SfHelper:
 
 if __name__=='__main__':
     sh = SfHelper()
+    sh.test_access_token()
+    url = "/services/data/v26.0/query/?q=select+Order_Id__c,+Name,+Tracking_Number__c,+Carrier__c,+Carrier_Link__c,+Status__c,+Scans__c+from+Shipment__c+where+Shipment_Number__C='S01001'"
+    response = sh.get_data(url, True)
     pass
