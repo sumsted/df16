@@ -20,3 +20,7 @@ healthIntent what am i carrying
 healthIntent health
 restartIntent restart game
 lookDirectionIntent look {direction}
+shipmentIntent where is my order
+shipmentIntent where are my orders
+shipmentIntent where is my shipment
+shipmentIntent where are my shipments

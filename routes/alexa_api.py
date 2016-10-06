@@ -2,7 +2,7 @@ from bottle import request, post
 
 from logit import logit
 from routes.alexa_dream_handlers import handle_story_intent, handle_about_intent, handle_gary_intent, handle_dude_intent, \
-    handle_help_intent, handle_session_end_request
+    handle_help_intent, handle_session_end_request, handle_shipment_intent
 from routes.alexa_game_handlers import handle_attack_intent, handle_play_intent, handle_navigate_intent, \
     handle_look_direction_intent, handle_look_intent, handle_take_intent, handle_eat_intent, handle_health_intent
 
@@ -50,6 +50,8 @@ def route_intent(alexa_request, alexa_session):
         return handle_gary_intent(intent, alexa_session)
     elif intent_name in ["dudeIntent"]:
         return handle_dude_intent(intent, alexa_session)
+    elif intent_name in ["shipmentIntent"]:
+        return handle_shipment_intent(intent, alexa_session)
     elif intent_name in ["AMAZON.HelpIntent", "helpIntent"]:
         return handle_help_intent()
     elif intent_name in ["AMAZON.CancelIntent", "AMAZON.StopIntent", 'quitIntent']:

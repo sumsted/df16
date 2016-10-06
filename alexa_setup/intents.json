@@ -28,6 +28,9 @@
       "intent": "playIntent"
     },
     {
+      "intent": "shipmentIntent"
+    },
+    {
       "intent": "attackIntent",
       "slots": [
         {

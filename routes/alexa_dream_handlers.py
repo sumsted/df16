@@ -1,4 +1,4 @@
-from dream.dream import get_help, gary, dude
+from dream.dream import get_help, gary, dude, get_shipments
 from logit import logit
 
 
@@ -119,6 +119,20 @@ def handle_story_intent(intent, session):
     reprompt_text = None
     try:
         speech_output += 'ugh, do you really want to hear a story?'
+    except Exception as e:
+        logit(str(e), 'ERROR')
+    return build_response(session_attributes, build_speechlet_response(
+        title, speech_output, reprompt_text, should_end_session))
+
+
+def handle_shipment_intent(intent, session):
+    title = "#DF16 - Order"
+    should_end_session = False
+    session_attributes = {}
+    speech_output = ""
+    reprompt_text = None
+    try:
+        speech_output = get_shipment()
     except Exception as e:
         logit(str(e), 'ERROR')
     return build_response(session_attributes, build_speechlet_response(
