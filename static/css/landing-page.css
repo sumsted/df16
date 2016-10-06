@@ -118,6 +118,17 @@ h6 {
     width: 100px;
 }
 
+.center-this-guy {
+    width: 500px;
+    float: none;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.page-this-guy {
+    margin: 100px 0 300px;
+}
+
 .astro-step {
     text-align: center;
     margin:  -14px 0 4px 0;
