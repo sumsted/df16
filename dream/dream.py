@@ -71,6 +71,6 @@ def get_shipment_by_order(order_id):
                 verb = "contains" if sf_object['Name'][-1] == "s" and sf_object['Name'][-2] != "s" else "is a"
                 speech += "Shipment %d %s %s and is being delivered by %s with a shipment status of %s. " % (i+1, verb, sf_object['Name'], sf_object['Carrier__c'], sf_object['Status__c'])
     except Exception as e:
-        logit('problem getting shipment: %s, %s'%str(e),url)
+        logit('problem getting shipment: %s, %s'%(str(e),url))
         speech = "There was a problem pulling your shipments"
     return speech
