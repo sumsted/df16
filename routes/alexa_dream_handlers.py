@@ -147,7 +147,8 @@ def handle_order_intent(intent, session):
     reprompt_text = None
     try:
         order_id = get_slot(intent, 'order_id', '')
-        speech_output = get_shipment_by_order(order_id)
+        order_id_str = ("00000000%d"%order_id)[-8:]
+        speech_output = get_shipment_by_order(order_id_str)
     except Exception as e:
         logit(str(e), 'ERROR')
     return build_response(session_attributes, build_speechlet_response(
