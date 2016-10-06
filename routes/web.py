@@ -59,3 +59,21 @@ def get_shipment(email_address, shipment_id):
     except Exception as e:
         logit('problem getting shipment for %s, %s'%(email_address, shipment_id))
     return shipments
+
+
+@get('/df/order/<email_address>/<order_id>')
+def get_shipment(email_address, order_id):
+    shipments = {
+        'shipments': [
+        ]
+    }
+    url = "/services/data/v37.0/query/?q=select+OrderNumber,(select+Shipment_Number__c,+Name,+Tracking_Number__c,+Carrier__c,+Carrier_Link__c,+Status__c,+Scans__c+from+Shipments__r)+from+Order+where+OrderNumber='%s'" % order_id
+
+    sh = SfHelper()
+    try:
+        sf_objects = sh.get_data(url)
+        for sf_object in sf_objects['records']:
+            shipments['shipments'] = sf_object['Shipments__r']['records']
+    except Exception as e:
+        logit('problem getting shipment for %s, %s'%(email_address, order_id))
+    return shipments
