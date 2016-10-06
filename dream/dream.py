@@ -44,6 +44,6 @@ def get_shipment():
                 verb = "are" if sf_object['Name'][-1] == "s" and sf_object['Name'][-2] != "s" else "is a"
                 speech += "Shipment %d %s %s, is being delivered by %s and has a shipment status of %s. " % (i+1, verb, sf_object['Name'], sf_object['Carrier__c'], sf_object['Status__c'])
     except Exception as e:
-        logit('problem getting shipment')
+        logit('problem getting shipment: %s'%str(e))
         speech = "There was a problem pulling your shipments"
     return speech
