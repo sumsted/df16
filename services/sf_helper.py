@@ -58,7 +58,7 @@ class SfHelper:
             url, reauthorize, str(headers), response.status_code, str(response.content)))
             if response.status_code == 200:
                 return response.json()
-            elif response.content.index('INVALID_SESSION_ID') and reauthorize is True:
+            elif response.content.index('INVALID_SESSION_ID') >=0 and reauthorize is True:
                 logit('** REAUTHORIZING **')
                 self.authorize()
                 return self.get_data(url, False)
