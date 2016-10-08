@@ -1,4 +1,3 @@
-
 import requests
 
 from settings import Settings
@@ -21,19 +20,22 @@ class SfHelper:
             self.authorize()
 
         def authorize(self):
+            logit('AUTHORIZING')
             credentials = {
                 'grant_type': 'password',
                 'client_id': settings.SALESFORCE['CONSUMER_KEY'],
                 'client_secret': settings.SALESFORCE['CONSUMER_SECRET'],
                 'username': settings.SALESFORCE['USERNAME'],
-                'password': settings.SALESFORCE['PASSWORD']+settings.SALESFORCE['SECURITY_TOKEN'],
+                'password': settings.SALESFORCE['PASSWORD'] + settings.SALESFORCE['SECURITY_TOKEN'],
                 'request_uri': 'http://localhost'
             }
 
             response = requests.post(settings.SALESFORCE['LOGIN_URL'], credentials)
             if response.status_code == 200:
+                logit('AUTHORIZE SUCCESS')
                 self.sf_access = response.json()
             else:
+                logit('AUTHORIZE FAIL, CODE: %d, RESPONSE: %s' % (response.status_code, response.content))
                 self.sf_access = {}
 
         def test_access_token(self):
@@ -41,20 +43,23 @@ class SfHelper:
                 'Authorization': 'Bearer ' + self.sf_access['access_token']
             }
 
-            response = requests.get(settings.SALESFORCE['BASE_URL']+'/services/data/v26.0/sobjects', headers=headers)
+            response = requests.get(settings.SALESFORCE['BASE_URL'] + '/services/data/v26.0/sobjects', headers=headers)
             if response.status_code == 200:
                 logit('sf good', 'INFO')
             else:
                 logit('sf bad', 'ERROR')
 
         def get_data(self, url, reauthorize=None):
-            reauthorize = True if reauthorize is None else False
+            reauthorize = True if reauthorize is None else reauthorize
             headers = {'Authorization': 'Bearer ' + self.sf_access['access_token']}
             request_url = self.sf_access['instance_url'] + url
             response = requests.get(request_url, headers=headers)
+            logit("URL: %s\nREAUTHORIZE: %s\nHEADERS: %s\nSTATUS_CODE: %d\nRESPONSE_CONTENT: %s\n" % (
+            url, reauthorize, str(headers), response.status_code, str(response.content)))
             if response.status_code == 200:
                 return response.json()
             elif response.content.index('INVALID_SESSION_ID') and reauthorize is True:
+                logit('** REAUTHORIZING **')
                 self.authorize()
                 return self.get_data(url, False)
             else:
@@ -108,7 +113,7 @@ class SfHelper:
             return self.instance.settings
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     sh = SfHelper()
     sh.test_access_token()
     url = "/services/data/v26.0/query/?q=select+Order_Id__c,+Name,+Tracking_Number__c,+Carrier__c,+Carrier_Link__c,+Status__c,+Scans__c+from+Shipment__c+where+Shipment_Number__C='S01001'"
