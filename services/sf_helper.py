@@ -55,10 +55,10 @@ class SfHelper:
             request_url = self.sf_access['instance_url'] + url
             response = requests.get(request_url, headers=headers)
             logit("URL: %s\nREAUTHORIZE: %s\nHEADERS: %s\nSTATUS_CODE: %d\nRESPONSE_CONTENT: %s\n" % (
-            url, reauthorize, str(headers), response.status_code, str(response.content)))
+                url, reauthorize, str(headers), response.status_code, str(response.content)))
             if response.status_code == 200:
                 return response.json()
-            elif response.content.index('INVALID_SESSION_ID') >=0 and reauthorize is True:
+            elif reauthorize is True:
                 logit('** REAUTHORIZING **')
                 self.authorize()
                 return self.get_data(url, False)
@@ -78,22 +78,12 @@ class SfHelper:
         except Exception as e:
             print('cannot access existing attribute on inner object: %s' % str(e))
 
-    # def __getattr__(self, item):
-    #     if self.instance is not None:
-    #         return self.instance.settings[item]
-    #     else:
-    #         return None
-
     def __setattr__(self, item, value):
         try:
             print('use existing instance attribute: %s' % repr(self.instance))
             return setattr(self.instance, item, value)
         except Exception as e:
             print('cannot access existing attribute on inner object: %s' % str(e))
-
-    # def __setattr__(self, key, value):
-    #     if self.instance is not None:
-    #         self.instance.settings[key] = value
 
     def get(self, item, default=None):
         if self.instance is not None:
