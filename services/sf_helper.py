@@ -54,8 +54,8 @@ class SfHelper:
             headers = {'Authorization': 'Bearer ' + self.sf_access['access_token']}
             request_url = self.sf_access['instance_url'] + url
             response = requests.get(request_url, headers=headers)
-            logit("URL: %s\nREAUTHORIZE: %s\nHEADERS: %s\nSTATUS_CODE: %d\nRESPONSE_CONTENT: %s\n" % (
-                url, reauthorize, str(headers), response.status_code, str(response.content)))
+            logit("URL: %s\nREAUTHORIZE: %s\nSTATUS_CODE: %d\nRESPONSE_CONTENT: %s\n" % (
+                url, reauthorize, response.status_code, str(response.content)))
             if response.status_code == 200:
                 return response.json()
             elif reauthorize is True:
