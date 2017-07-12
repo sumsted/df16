@@ -16,3 +16,8 @@ def get_carrier(tracking_number):
         response = {'success': False}
     return response
 
+
+@get('/account/<account_number>')
+def get_account(account_number):
+    result = {'success': True, 'tracks': ['779604161320', '787117332275', '622448465873']}
+    return result
